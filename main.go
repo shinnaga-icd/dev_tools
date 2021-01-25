@@ -7,7 +7,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/heroku/x/hmetrics/onload"
-	"github.com/russross/blackfriday"
 )
 
 func main() {
@@ -17,17 +16,24 @@ func main() {
 		log.Fatal("$PORT must be set")
 	}
 
-	router := gin.New()
-	router.Use(gin.Logger())
-	router.LoadHTMLGlob("templates/*.tmpl.html")
-	router.Static("/static", "static")
+	serve := gin.Default()
+	serve.Use(gin.Logger())
+	serve.LoadHTMLGlob("templates/*.tmpl.html")
 
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl.html", nil)
-	})
-	router.GET("/mark", func(c *gin.Context) {
-		c.String(http.StatusOK, string(blackfriday.Run([]byte("**hi!**"))))
+	serve.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.tmpl.html", gin.H{
+			"message": "GET Reqest",
+		})
 	})
 
-	router.Run(":" + port)
+	serve.POST("/", func(c *gin.Context) {
+
+		c.HTML(http.StatusOK, "index.tmpl.html", gin.H{
+			"message": "POST Reqest",
+			"bhreq":   c.PostForm("bhreq"),
+			"p4":      c.PostForm("p4"),
+		})
+	})
+
+	serve.Run(":" + port)
 }
