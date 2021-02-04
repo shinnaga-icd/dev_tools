@@ -1,0 +1,19 @@
+<html>
+    <body>
+        <div>
+            <h1>暗号さん・複合さん</h1>
+        </div>
+        <div>
+            <h3 font-color="red">{{.error}}</h3>
+            <form action="/encrypt" method="POST">
+                <p>text : <input name="text" value="{{.text}}" /></p>
+                <p>encrypt key : <input name="key" value="{{.key}}"></p>
+                <p>IV : <input name="iv" value="{{.iv}}"></p>
+                <button name="encrypt" type="submit" value="1" disabled>暗号化</button>
+                <button name="decrypted" type="submit" value="1" disabled>復号化</button>
+            </form>
+            {{.result}}
+        </div>
+        <a href="/">back</a>
+    </body>
+</html>

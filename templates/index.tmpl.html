@@ -1,13 +1,13 @@
 <html>
 <body>
 <div>
-  <h1>POST TEST</h1>
+  <h1>My Dev Tools</h1>
 </div>
 <div>
-  <h3>{{.message}}</h3>
   <ul>
-      <li>{{.p4}}</li>
-      <li>{{.bhreq}}</li>
+      {{range .menus}}
+      <li><a href="{{.URL}}">{{.Name}}</li>
+      {{end}}
   </ul>
 </div>
 
