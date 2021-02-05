@@ -1,4 +1,9 @@
 <html>
+    <head>
+        <style type="text/css">
+            @import url("/static/css/main.css");
+        </style>
+    </head>
     <body>
         <div>
             <h1>暗号さん・複合さん</h1>
@@ -6,13 +11,21 @@
         <div>
             <h3 font-color="red">{{.error}}</h3>
             <form action="/encrypt" method="POST">
-                <p>text : <input name="text" value="{{.text}}" /></p>
-                <p>encrypt key : <input name="key" value="{{.key}}"></p>
-                <p>IV : <input name="iv" value="{{.iv}}"></p>
-                <button name="encrypt" type="submit" value="1" disabled>暗号化</button>
-                <button name="decrypted" type="submit" value="1" disabled>復号化</button>
+                <div>
+                    <span class="col-1">plain text/encrypted</span>
+                    <span class="col-2"><input name="text" type="text" class="long" value="{{.text}}" /></span>
+                </div>
+                <div>
+                    <span class="col-1">encrypt key (hex digit)</span>
+                    <span class="col-2"><input name="key" type="text" class="long" value="{{.key}}"></span>
+                <div>
+                    <span class="col-1">IV (hex digit)</span>
+                    <span class="col-2"><input name="iv" type="text" class="long" value="{{.iv}}"></span>
+                </div>
+                <button name="encrypt" type="submit" value="1">暗号化</button>
+                <button name="decrypted" type="submit" value="1">復号化</button>
             </form>
-            {{.result}}
+            <h4>{{.result}}<h4>
         </div>
         <a href="/">back</a>
     </body>

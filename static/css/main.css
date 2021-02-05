@@ -1,0 +1,13 @@
+.col-1{
+    display: inline-block;
+    width: 188px;
+}
+
+.col-2{
+    display: inline-block;
+    width: 300px;
+}
+
+input[class="long"]{
+    width: 280px;
+}

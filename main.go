@@ -4,6 +4,7 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"encoding/base64"
+	"encoding/hex"
 	"log"
 	"net/http"
 	"os"
@@ -28,6 +29,7 @@ func main() {
 	serve := gin.Default()
 	serve.Use(gin.Logger())
 	serve.LoadHTMLGlob("templates/*.tmpl.html")
+	serve.Static("/static", "./static")
 
 	// index page
 	serve.GET("/", func(c *gin.Context) {
@@ -85,16 +87,19 @@ func main() {
 //  暗号化 AES
 func encrypt(plainText string, key string, iv string) (string, error) {
 
-	c, err := aes.NewCipher([]byte(key))
+	hexKey, _ := hex.DecodeString(key)
+	hexIv, _ := hex.DecodeString(iv)
+
+	block, err := aes.NewCipher([]byte(hexKey))
 	if err != nil {
 		return "", err
 	}
 
-	cfb := cipher.NewCFBEncrypter(c, []byte(iv))
-	ciphertext := make([]byte, len([]byte(plainText)))
-	cfb.XORKeyStream(ciphertext, []byte(plainText))
+	cfb := cipher.NewCFBEncrypter(block, []byte(hexIv))
+	cipherText := make([]byte, len([]byte(plainText)))
+	cfb.XORKeyStream(cipherText, []byte(plainText))
 
-	return base64.StdEncoding.EncodeToString(ciphertext), nil
+	return base64.StdEncoding.EncodeToString(cipherText), nil
 }
 
 // 復号化 AES
@@ -104,14 +109,14 @@ func decrypt(encrypted string, key string, iv string) (string, error) {
 		return "", err
 	}
 
-	c, err := aes.NewCipher([]byte(key))
+	block, err := aes.NewCipher([]byte(key))
 	if err != nil {
 		return "", err
 	}
 
-	cfbdec := cipher.NewCFBDecrypter(c, []byte(iv))
-	plainText := make([]byte, len([]byte(byteEnc)))
-	cfbdec.XORKeyStream([]byte(encrypted), plainText)
+	cfbdec := cipher.NewCFBDecrypter(block, []byte(iv))
+	cipherText := make([]byte, len(byteEnc))
+	cfbdec.XORKeyStream(cipherText, cipherText)
 
-	return string(plainText), nil
+	return string(cipherText), nil
 }
