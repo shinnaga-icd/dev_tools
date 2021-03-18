@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <style type="text/css">
+            @import url("/static/css/main.css");
+        </style>
+    </head>
+    <body>
+        <div>
+            <h1>PDF出し太郎</h1>
+        </div>
+        <div>
+            <h3 font-color="red">{{.error}}</h3>
+            <form action="/pdf" method="POST">
+                <button name="post" type="submit">POST送信</button>
+            </form>
+            <input type="button" onclick="location.href='pdf?download=pdf'" value="GET送信" />
+        </div>
+        <a href="/">back</a>
+    </body>
+</html>
