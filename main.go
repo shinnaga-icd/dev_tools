@@ -88,9 +88,7 @@ func main() {
 	// outputpdf
 	serve.GET("/pdf", func(c *gin.Context) {
 		download := c.Query("download")
-		log.Printf(download)
 		if download == "pdf" {
-			log.Print("test1")
 			downloadPdf(c.Writer, c.Request)
 		}
 
