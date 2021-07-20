@@ -9,6 +9,8 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	_ "github.com/heroku/x/hmetrics/onload"
 	"github.com/jung-kurt/gofpdf"
@@ -20,6 +22,7 @@ type Menu struct {
 	URL  string
 }
 
+// Controller
 func main() {
 	port := os.Getenv("PORT")
 
@@ -32,12 +35,17 @@ func main() {
 	serve.LoadHTMLGlob("templates/*.tmpl.html")
 	serve.Static("/static", "./static")
 
+	store := cookie.NewStore([]byte("secret"))
+	serve.Use(sessions.Sessions("mysession", store))
+
 	// index page
 	serve.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.tmpl.html", gin.H{"menus": []Menu{
 			{"リクエスト確認さん", "/request"},
 			{"暗号さん・複合さん", "/encrypt"},
 			{"PDF出し太郎", "/pdf"},
+			{"SESSION入り太郎", "/login"},
+			{"SESSION見太郎", "/session"},
 		},
 		})
 	})
@@ -98,9 +106,40 @@ func main() {
 		downloadPdf(c.Writer, c.Request)
 	})
 
+	//login session
+	serve.POST("/login", func(c *gin.Context) {
+		param := "bhreq"
+		session := sessions.Default(c)
+
+		session.Set(param, c.PostForm(param))
+		session.Save()
+
+		c.HTML(http.StatusOK, "login.tmpl.html", gin.H{
+			"message": "session saved",
+			param:     session.Get(param),
+		})
+
+	})
+
+	//session confirm
+	serve.GET("/session", func(c *gin.Context) {
+		param := "bhreq"
+		session := sessions.Default(c)
+
+		c.HTML(http.StatusOK, "session.tmpl.html", gin.H{
+			"message": "get session",
+			param:     session.Get(param),
+		})
+
+		session.Clear()
+		session.Save()
+
+	})
+
 	serve.Run(":" + port)
 }
 
+// download PDF
 func downloadPdf(w http.ResponseWriter, r *http.Request) {
 	//make pdf
 	pdf := gofpdf.New("P", "mm", "A4", "")
