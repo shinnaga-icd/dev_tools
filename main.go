@@ -127,8 +127,8 @@ func main() {
 		session := sessions.Default(c)
 		sessionVal := session.Get(param)
 
-		session.Clear()
-		session.Save()
+		// session.Clear()
+		// session.Save()
 
 		c.HTML(http.StatusOK, "session.tmpl.html", gin.H{
 			"message": "get session",
