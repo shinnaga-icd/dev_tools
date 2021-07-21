@@ -125,14 +125,15 @@ func main() {
 	serve.GET("/session", func(c *gin.Context) {
 		param := "bhreq"
 		session := sessions.Default(c)
-
-		c.HTML(http.StatusOK, "session.tmpl.html", gin.H{
-			"message": "get session",
-			param:     session.Get(param),
-		})
+		sessionVal := session.Get(param)
 
 		session.Clear()
 		session.Save()
+
+		c.HTML(http.StatusOK, "session.tmpl.html", gin.H{
+			"message": "get session",
+			param:     sessionVal,
+		})
 
 	})
 
