@@ -46,6 +46,7 @@ func main() {
 			{"PDF出し太郎", "/pdf"},
 			{"SESSION入り太郎", "/login"},
 			{"SESSION見太郎", "/session"},
+			{"ダイアログ確認したい君", "/dialog"}
 		},
 		})
 	})
