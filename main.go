@@ -137,6 +137,14 @@ func main() {
 
 	})
 
+	// dialog page
+	serve.GET("/dialog", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "dialog.tmpl.html", gin.H{})
+	})
+	serve.POST("/dialog", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "dialog.tmpl.html", gin.H{})
+	})
+
 	serve.Run(":" + port)
 }
 
@@ -193,3 +201,4 @@ func decrypt(encrypted string, key string, iv string) (string, error) {
 
 	return string(cipherText), nil
 }
+
