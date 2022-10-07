@@ -155,7 +155,12 @@ func main() {
 		c.HTML(http.StatusOK, "3dsconfirm.tmpl.html", gin.H{})
 	})
 	serve.POST("/3dsRedirect", func(c *gin.Context) {
-		c.Redirect(http.StatusFound, "https://shinji.nagasaki%40infcurion.com:FgcIv4eR@preview-creo-dev.backlog.jp/dav/INF_BANKIT/work/nagasaki/3DS2_a.html")
+		accessPage := c.PostForm("accessPage")
+		if accessPage == "success" {
+			c.Redirect(http.StatusFound, "https://shinji.nagasaki%40infcurion.com:FgcIv4eR@preview-creo-dev.backlog.jp/dav/INF_BANKIT/work/nagasaki/3DS2%28OK%29_a.html")
+		} else {
+			c.Redirect(http.StatusFound, "https://shinji.nagasaki%40infcurion.com:FgcIv4eR@preview-creo-dev.backlog.jp/dav/INF_BANKIT/work/nagasaki/3DS2_a.html")
+		}
 	})
 
 	serve.Run(":" + port)
