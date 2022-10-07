@@ -46,6 +46,7 @@ func main() {
 			{"PDF出し太郎", "/pdf"},
 			{"SESSION入り太郎", "/login"},
 			{"SESSION見太郎", "/session"},
+			{"3DS確認の検証したい君", "/3ds"},
 			{"ダイアログ確認したい君", "/dialog"},
 		},
 		})
@@ -146,6 +147,17 @@ func main() {
 		c.HTML(http.StatusOK, "dialog.tmpl.html", gin.H{})
 	})
 
+	// 3ds page
+	serve.GET("/3ds", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "3dsinput.tmpl.html", gin.H{})
+	})
+	serve.POST("/3dsConf", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "3dsconfirm.tmpl.html", gin.H{})
+	})
+	serve.POST("/3dsRedirect", func(c *gin.Context) {
+		c.Redirect(http.StatusFound, "https://shinji.nagasaki%40infcurion.com:FgcIv4eR@preview-creo-dev.backlog.jp/dav/INF_BANKIT/work/nagasaki/3DS2_a.html")
+	})
+
 	serve.Run(":" + port)
 }
 
@@ -202,4 +214,3 @@ func decrypt(encrypted string, key string, iv string) (string, error) {
 
 	return string(cipherText), nil
 }
-

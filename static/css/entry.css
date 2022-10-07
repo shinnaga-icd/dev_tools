@@ -1,0 +1,56 @@
+#numberBlock .input_block input {
+  width: 60px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#numberBlock .input_block span {
+  margin: 0 1px;
+}
+
+#expymBlock .input_block select {
+  width: 80px;
+  display: inline-block;
+}
+
+#expymBlock .input_block span {
+  margin: 0 5px;"
+}
+
+#seccdBlock .input_block input {
+  width: 60px;
+}
+
+#seccdBlock img {
+  max-width: 100%;
+}
+
+#amountBlock .input_block input {
+  width: 160px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.input_current {
+  background-color: rgb(255,255,200);
+}
+
+.input_error {
+  background-color: rgb(255,200,200);
+}
+
+.input_block .tooltip .tooltip-inner {
+  background-color: rgb(255,255,255);
+  border: 2px solid rgb(255,80,80);
+  color: rgb(255,80,80);
+  text-align: left;
+  max-width: 100%;
+}
+
+.input_block .tooltip.top .tooltip-arrow {
+  border-top-color: rgb(255,80,80);
+}
+
+.input_block .tooltip.bottom .tooltip-arrow {
+  border-bottom-color: rgb(255,80,80);
+}

@@ -1,0 +1,64 @@
+html, body {
+  font-family: Helvetica; !important;
+}
+
+input[type=text], select.form-control {
+  font-size: 16px;
+  padding: 3px;
+}
+
+.btn-primary {
+  background: rgb(80,120,255);
+  color: rgb(255,255,255);
+  border: 3px solid rgb(80,120,255);
+}
+
+.btn-primary:hover, .btn-primary:focus,
+.btn-primary:active, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary:active.focus,
+.btn-primary.active, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary.active.focus,
+.open > .dropdown-toggle.btn-primary,
+.open > .dropdown-toggle.btn-primary:hover,
+.open > .dropdown-toggle.btn-primary:focus,
+.open > .dropdown-toggle.btn-primary.focus,
+.btn-primary.disabled:hover, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus, .btn-primary[disabled]:focus, fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled.focus, .btn-primary[disabled].focus, fieldset[disabled] .btn-primary.focus {
+  background: rgb(60,100,235);
+  color: rgb(255,255,255);
+  border: 3px solid rgb(60,100,235);
+}
+
+.btn-lg {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.alert {
+  padding: 3px 5px;
+  margin: 3px 0;
+}
+
+h3.pageTitle{
+  text-align :center;
+}
+
+h4.pageCaption {
+  padding: 20px 0;
+}
+
+.free_block {
+  padding: 20px 10px;
+}
+
+.err_block {
+  background-color: rgb(255,80,80);
+  color: rgb(255,255,255);
+}
+
+span.asterisk {
+  font-size:12px;
+}
+
+#btnApliClose {
+  margin:20px 0;
+}

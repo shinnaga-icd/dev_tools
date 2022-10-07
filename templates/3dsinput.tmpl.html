@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<!-- saved from url=(0113)https://000d.dp-test.jp/p/registSecurityInfo/RW13D4020101?code=5WFw%2FeSQXKKkRXn2gdcYsSCUDkekouc2C%2FXvpRllzEA%3D -->
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <meta http-equiv="Expires" content="0">
+  <meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+  
+    <title>入力画面</title>
+  
+
+  <link type="text/css" href="/static/css/bootstrap.min.css" rel="stylesheet">
+  <link type="text/css" href="/static/css/common.css" rel="stylesheet">
+  <link type="text/css" href="/static/css/entry.css" rel="stylesheet">
+  <script type="text/javascript" src="/static/js/jquery.js"></script>
+  <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/static/js/entry.js"></script>
+</head>
+<body>
+<div class="container">
+
+  
+    <h3 class="pageTitle">クレジットカード登録</h3>
+
+    <h4 class="pageCaption">■ 登録内容を入力のうえ、「確認」ボタンを押してください</h4>
+    <div id="entryAlert" class="alert alert-danger hidden" style="margin:0 0 20px;" role="alert">
+        
+    </div>
+  
+  
+  
+<script type="text/javascript">
+<!--
+function nablarch_submit(event, element) {
+    var isAnchor = element.tagName.match(/a/i);
+    var form = nablarch_findForm(element, isAnchor);
+    if (form == null) {
+        return false;
+    }
+    // if (nablarch_submission_info.endMark[form.name] == null) {
+    //     return false;
+    // }
+    if ((typeof form.onsubmit) == "function") {
+        if (!nablarch_invokeOnsubmit(form, event)) {
+          console.log("test4");
+            return false;
+        }
+    }
+
+    var submitName = element.name;
+    var formData = nablarch_submission_info[form.name];
+    // var submissionData = formData[submitName];
+    var submissionData = null;
+    nablarch_submitOnWindow(submitName, form, submissionData);
+
+    /*
+    if (!submissionData.allowDoubleSubmission) {
+        element.onclick = nablarch_stopSubmission;
+        if (!isAnchor) {
+            element.disabled = true;
+        }
+    }
+    form["nablarch_submit"].value = submitName;
+    if (submissionData.submissionAction == "POPUP"
+            || submissionData.submissionAction == "DOWNLOAD") {
+              console.log("test6");
+        nablarch_submitToNewForm(submitName, form, submissionData)
+    } else {
+      console.log("test7");
+        nablarch_submitOnWindow(submitName, form, submissionData);
+    }
+    */
+    return false;
+}
+function nablarch_submitOnWindow(submitName, form, submissionData) {
+    // form.action = submissionData.action;
+    form.submit();
+}
+var nablarch_opened_windows = {};
+function nablarch_submitToNewForm(submitName, form, submissionData) {
+    var target = submissionData.popupWindowName;
+    if (target == null) {
+        target = "nablarch__target_" + (+new Date());
+    }
+    if (submissionData.submissionAction == "POPUP") {
+        var windowOption = submissionData.popupOption;
+        var openedWindow = window.open("about:blank", target, windowOption != null ? windowOption : "");
+        nablarch_opened_windows[target] = openedWindow;
+    }
+    var tempForm = document.createElement("form");
+    var changeParamNames = submissionData.changeParamNames;
+    for (var i = 0; i < form.elements.length; i++) {
+        var element = form.elements[i];
+        if (element.type.match(/^submit$|^button$/i)) {
+            continue;
+        }
+        var paramName = changeParamNames[element.name];
+        if (paramName != null) {
+            nablarch_addHiddenTagFromElement(tempForm, paramName, element);
+        } else {
+            nablarch_addHiddenTagFromElement(tempForm, element.name, element);
+        }
+    }
+    if (submissionData.submissionAction == "POPUP") {
+        tempForm.target = target;
+    }
+    tempForm.action = submissionData.action;
+    tempForm.method = "post";
+    var body = document.getElementsByTagName("body")[0];
+    body.appendChild(tempForm);
+    tempForm.submit();
+    body.removeChild(tempForm);
+}
+function nablarch_findForm(element, isAnchor) {
+    if (isAnchor) {
+        var parent = element.parentNode;
+        while (parent != null && !parent.tagName.match(/^form$|^body$/i)) {
+            parent = parent.parentNode;
+        }
+        if (parent == null || !parent.tagName.match(/form/i)) {
+            return null;
+        }
+        return parent;
+    } else {
+        return element.form;
+    }
+}
+function nablarch_invokeOnsubmit(form, event) {
+    var onSubmitFunc = form.onsubmit;
+    var ret = onSubmitFunc.call(form, event);
+    return !( (ret != undefined && ret != null) && ret == false );
+}
+function nablarch_addHiddenTagFromElement(form, name, element) {
+    if (element.disabled) {
+        return;
+    }
+    if (element.tagName.match(/select/i)) {
+        for (var i = 0; i < element.options.length; i++) {
+            var option = element.options[i];
+            if (option.selected) {
+                nablarch_addHiddenTag(form, name, option.value);
+            }
+        }
+    } else if (element.type.match(/^checkbox$|^radio$/i)) {
+        if (element.checked) {
+            nablarch_addHiddenTag(form, name, element.value);
+        }
+    } else {
+        nablarch_addHiddenTag(form, name, element.value);
+    }
+}
+function nablarch_addHiddenTag(form, name, value) {
+    var input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    input.value = value;
+    form.appendChild(input);
+}
+function nablarch_stopSubmission() {
+    if ((typeof nablarch_handleDoubleSubmission) == "function") {
+         nablarch_handleDoubleSubmission(this);
+    }
+    return false;
+}
+var nablarch_submission_info = {};
+nablarch_submission_info.endMark = {};
+-->
+</script>
+<form name="nablarch_form1" action="/3dsConf" method="post" autocomplete="off">
+
+    
+      <div id="numberBlock" class="form-group">
+        <label for="number">クレジットカード番号</label>
+        <div class="alert alert-danger hidden" role="alert">
+          <div class="hidden"></div>
+          <div class="hidden"></div>
+          <div class="hidden"></div>
+          <div class="hidden"></div>
+        </div>
+        <div class="input_block">
+          <input type="tel" name="W13D402.firstIn" id="first" class="form-control" value="4111" maxlength="4" placeholder="" data-err="" tabindex="1"><span>－</span>
+          <input type="tel" name="W13D402.secondIn" id="second" class="form-control" value="1111" maxlength="4" placeholder="" data-err="" tabindex="2"><span>－</span>
+          <input type="tel" name="W13D402.thirdIn" id="third" class="form-control" value="1111" maxlength="4" placeholder="" data-err="" tabindex="3"><span>－</span>
+          <input type="tel" name="W13D402.fourthIn" id="fourth" class="form-control" value="1111" maxlength="4" placeholder="" data-err="" tabindex="4">
+        </div>
+        <div style="display:none">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="field text ">
+  
+  <label>
+    クレジットカード番号１：  
+  </label>
+
+  
+  <div class="fieldinput">
+    
+    
+    
+      <input id="W13D402.first" class=" " type="text" name="W13D402.first" value="" maxlength="4" autocomplete="off" placeholder="">
+    
+    
+  </div>
+
+</div>
+
+
+    
+  <div class="fielderror">
+    
+  </div>
+  
+  
+
+
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="field text ">
+  
+  <label>
+    クレジットカード番号２：  
+  </label>
+
+  
+  <div class="fieldinput">
+    
+    
+    
+      <input id="W13D402.second" class=" " type="text" name="W13D402.second" value="" maxlength="4" autocomplete="off" placeholder="">
+    
+    
+  </div>
+
+</div>
+
+
+    
+  <div class="fielderror">
+    
+  </div>
+  
+  
+
+
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="field text ">
+  
+  <label>
+    クレジットカード番号３：  
+  </label>
+
+  
+  <div class="fieldinput">
+    
+    
+    
+      <input id="W13D402.third" class=" " type="text" name="W13D402.third" value="" maxlength="4" autocomplete="off" placeholder="">
+    
+    
+  </div>
+
+</div>
+
+
+    
+  <div class="fielderror">
+    
+  </div>
+  
+  
+
+
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="field text ">
+  
+  <label>
+    クレジットカード番号４：  
+  </label>
+
+  
+  <div class="fieldinput">
+    
+    
+    
+      <input id="W13D402.fourth" class=" " type="text" name="W13D402.fourth" value="" maxlength="4" autocomplete="off" placeholder="">
+    
+    
+  </div>
+
+</div>
+
+
+    
+  <div class="fielderror">
+    
+  </div>
+  
+  
+
+
+
+        </div>
+        <div id="helpBlock" class="help-block">
+          ※半角数字で入力してください<br>
+        </div>
+      </div><!-- /#numberBlock -->
+
+      <div id="expymBlock" class="form-group">
+        <label for="expym">有効期限</label>
+        <div class="input_block">
+          <select name="W13D402.ykkMonth" id="ykkMonth" class="form-control" data-err="" tabindex="5">
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+          <span>月</span>／
+          <select name="W13D402.ykkYear" id="ykkYear" class="form-control" data-err="" tabindex="6">
+            
+              <option value="2022">22</option>
+            
+              <option value="2023">23</option>
+            
+              <option value="2024" selected="true">24</option>
+            
+              <option value="2025">25</option>
+            
+              <option value="2026">26</option>
+            
+              <option value="2027">27</option>
+            
+              <option value="2028">28</option>
+            
+              <option value="2029">29</option>
+            
+              <option value="2030">30</option>
+            
+              <option value="2031">31</option>
+            
+              <option value="2032">32</option>
+            
+              <option value="2033">33</option>
+            
+              <option value="2034">34</option>
+            
+              <option value="2035">35</option>
+            
+              <option value="2036">36</option>
+            
+              <option value="2037">37</option>
+            
+              <option value="2038">38</option>
+            
+              <option value="2039">39</option>
+            
+              <option value="2040">40</option>
+            
+              <option value="2041">41</option>
+            
+          </select>
+          <span>年</span>
+        </div>
+      </div><!-- /#expymBlock -->
+
+      <div id="seccdBlock" class="form-group">
+        <label for="seccd">セキュリティコード</label>
+        <div class="alert alert-danger hidden" role="alert"></div>
+        <div class="input_block">
+          <input type="tel" name="W13D402.sctCod" id="seccd" class="form-control" value="123" maxlength="3" placeholder="" data-err="" tabindex="7">
+        </div>
+        <div id="helpBlock" class="help-block">
+          ※半角数字で入力してください<br>
+          ※カード裏面に印字されている3桁の番号です
+        </div>
+        <img id="cardImg" src="/static/img/card-back.png">
+      </div><!-- /#seccdBlock -->
+
+      <div id="amountBlock" class="form-group">
+        <label for="amount">チャージ金額</label>
+        <div class="alert alert-danger hidden" role="alert"></div>
+        <div class="input_block">
+          <input type="tel" name="W13D402.ksiKgkIn" id="amount" class="form-control" value="100" maxlength="8" placeholder="" data-err="" tabindex="8">&nbsp;円
+        </div>
+        <div style="display:none">
+          <div class="field" id="ksiKgk">
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="field text ">
+  
+  <label>
+    チャージ金額：  
+  </label>
+
+  
+  <div class="fieldinput">
+    
+    
+    
+      <input id="W13D402.ksiKgk" class="autoconv_hankaku " type="text" name="W13D402.ksiKgk" value="" maxlength="8" autocomplete="off" placeholder="">
+    
+    
+  </div>
+
+</div>
+
+
+    
+  <div class="fielderror">
+    
+  </div>
+  
+  
+
+
+
+          </div>
+        </div>
+        <div class="help-block">
+          ※チャージ可能額は以下の通りです<br><table border="1"><tbody><tr bgcolor="#C0C0C0"><th>　　ご利用のサービス名称　</th><th>　チャージ可能額　</th></tr><tr><td>　BANKIT Me（本人確認前）</td><td>　\1,000～\20,000　</td></tr><tr><td>　BANKIT You（本人確認後）</td><td>　\1,000～\50,000　</td></tr></tbody></table>※メインWalletの残高上限を超えてのチャージは行えません<br>
+        </div>
+      </div><!-- /#amountBlock -->
+      
+    
+    
+
+    <input type="hidden" name="tokenApiKey" id="tokenApiKey" value="cd76ca65-7f54-4dec-8ba3-11c12e36a548">
+    <input type="hidden" name="tokenApiUrl" id="tokenApiUrl" value="https://api.veritrans.co.jp/4gtoken">
+    <input type="hidden" name="curYm" id="curYm" value="202210">
+    <input type="hidden" name="W13D402.token" id="token">
+    <input type="hidden" name="code" id="code" value="5WFw/eSQXKKkRXn2gdcYsSCUDkekouc2C/XvpRllzEA=">
+
+    
+      <div id="btnConfirm" class="btn btn-primary btn-lg btn-block" tabindex="9">確認</div>
+      <div style="display:none">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="buttonWrapper">
+<button id="checkBtn" class="grid-col-3 " type="button" name="nablarch_form1_1" onclick="return window.nablarch_submit(event, this);">
+  <i class=""></i>
+  確認
+  
+</button>
+</div>
+
+
+      </div>
+      <div class="free_block">
+        <br><br><br><br><br><br><br><br><br><br>
+      </div>
+    
+    
+  
+<input type="hidden" name="nablarch_hidden" value="viVuus7o3mZO7VAd9WSWLegPTIkWnkQxVhvTzDM5py6pV5Umvs+1nlGdpt0syiUmG2wM0B9dMSNwmIuUOxcVFnTlSRe1h8kpZHpFl535zhYKCI+PvvSaqC2XXqc2Y4c//gz6IPJ2AI7JfZ0qqCi+JG4lc8/uROC+PWmIKq0x1wTnh59DF90GOuRmhDl199FuUBEhkdlukh3MVzhmSk/IMM+mFLu8TmYVrfIE+wk9yjvAV6py4KIkf0/soQNaxPUHsk7fHaPwjyUozr+x2YetL2lKhZ15MmxlXA+HAX+oZvYEYIL3Z1ZrGG/AgbbXxMvzTduNzlgvoY1EYs3l+vOYXKnngi0ipnZHGjeRWPbdn/gqsw3f5TejZ1ZEZcHLOGsaz7kiJ3GqCAcxHhvjmQSzSQ==">
+<input type="hidden" name="nablarch_submit" value="">
+<script type="text/javascript">
+</script>
+</form>
+<script type="text/javascript">
+</script>
+</div><!-- /.container -->
+<script type="text/javascript">
+</script>
+
+</body></html>
